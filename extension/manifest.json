@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Everything",
+  "version": "0.2.0",
+  "description": "Crypto and tokenized real-world assets, news, watchlists and account alerts.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Everything"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "storage",
+    "alarms"
+  ],
+  "optional_permissions": [
+    "notifications"
+  ],
+  "icons": {
+    "128": "icon.png"
+  },
+  "host_permissions": [
+    "http://127.0.0.1:3074/*",
+    "http://localhost:3074/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; base-uri 'self'"
+  }
+}

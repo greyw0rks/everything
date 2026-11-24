@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#d8f0f6">
+  <title>Everything Crypto — Market Signal Board</title>
+  <meta name="description" content="Crypto market capitalization, liquidations, major price movers and newly listed tokens, with the evidence behind every signal.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="interaction.css">
+  <link rel="stylesheet" href="accounts.css">
+  <link rel="stylesheet" href="markets.css">
+  <script type="module" src="app.js"></script>
+<link rel="stylesheet" href="popup.css"><script src="popup.js" defer></script></head>
+<body>
+<svg class="icon-library" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+ <symbol id="i-board" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+ <symbol id="i-wire" viewBox="0 0 24 24"><path d="M5 5h14M5 12h14M5 19h14"/></symbol>
+ <symbol id="i-source" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 4 16 4 16 0V5M4 12v7c0 4 16 4 16 0v-7"/></symbol>
+ <symbol id="i-up" viewBox="0 0 24 24"><path d="m4 16 6-6 4 4 6-9M14 5h6v6"/></symbol>
+ <symbol id="i-down" viewBox="0 0 24 24"><path d="m4 8 6 6 4-4 6 9M14 19h6v-6"/></symbol>
+ <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 8h18s-3-1-3-8M10 21h4"/></symbol>
+ <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+ <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+ <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></symbol>
+ <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+ <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+ <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 8a3 3 0 0 1 6 1c0 2-3 2-3 4M12 17h.01"/></symbol>
+ <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></symbol>
+ <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
+ <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 2c2 6-3 7-1 11 2-1 3-4 3-4 7 6 6 12-2 13C3 21 1 14 7 8c0 3 2 3 2 3s-1-5 3-9Z"/></symbol>
+</svg>
+<header class="site-header">
+ <div class="header-inner">
+  <a class="logo" href="http://127.0.0.1:3074/" target="_blank" rel="noopener" aria-label="Everything home"><span class="brand-mark" aria-hidden="true">E</span>Everything</a>
+  <nav class="nav" aria-label="Main navigation">
+   <a class="nav-current" href="#market-board"><svg class="icon"><use href="#i-board"/></svg>Market Board</a>
+   <a href="#signal-wire"><svg class="icon"><use href="#i-wire"/></svg>Signal Wire</a>
+   <a href="#crypto-news"><svg class="icon"><use href="#i-wire"/></svg>News</a>
+  </nav>
+  <div class="header-actions">
+   <button class="header-icon mobile-watch" data-open="watchlist" aria-label="Tracked coins"><svg class="icon"><use href="#i-star"/></svg></button>
+   <button class="header-icon" data-action="refresh" aria-label="Refresh data" title="Refresh data"><svg class="icon"><use href="#i-clock"/></svg></button>
+   <button class="user" data-open="account" aria-label="My account"><span class="av mode-avatar"></span><span id="account-name">My account<small id="mode-label">Sign in</small></span><svg class="icon"><use href="#i-more"/></svg></button>
+  </div>
+ </div>
+</header>
+<main id="stage" class="page" aria-label="Crypto market dashboard">
+ <div class="page-heading" id="market-board">
+  <div><h1 class="board-title">Everything Crypto</h1><p>Major moves, fresh listings, and the numbers behind them.</p></div>
+  <label class="search"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><span class="sr-only">Search tokens and signals</span><input id="search" type="search" placeholder="Search tokens and signals" autocomplete="off"><span class="search-hint" aria-hidden="true">⌘ K</span></label>
+ </div>
+ <p id="board-status" class="board-status" role="status">Connecting to market data…</p>
+ <div class="page-layout">
+  <aside class="utility-rail">
+   <nav class="side" aria-label="Markets">
+    <a class="selected" href="popup.html" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-board"/></svg>Crypto</a>
+    <a href="rwa.html"><svg class="icon" aria-hidden="true"><use href="#i-source"/></svg>RWA</a>
+   </nav>
+   <button class="rail-account" data-open="watchlist">Tracked coins</button>
+   <div class="rail-actions">
+   <button class="bell" data-open="notifications" aria-label="Notifications" title="Notifications"><svg class="icon"><use href="#i-bell"/></svg><b id="signal-count">—</b></button>
+   <button class="help-button" data-open="about" aria-label="About Everything Crypto" title="About"><svg class="icon"><use href="#i-help"/></svg></button>
+   </div>
+   <p class="market-context">One account.<br>Two market views.</p>
+  </aside>
+  <div class="market-columns">
+   <div class="primary-column">
+    <section class="card market-card" aria-labelledby="market-title">
+     <div class="card-heading"><h2 id="market-title">Market capitalization</h2><button class="bd" data-open="market" aria-label="Inspect market capitalization"><svg class="icon"><use href="#i-plus"/></svg></button></div>
+     <button class="card-body" data-open="market"><span class="market-value" id="market-value">—</span><p id="market-summary">Loading market valuation…</p></button>
+     <div class="card-footer"><button class="pill d" id="market-pill" data-open="market">Loading</button><div class="acts"><button data-open="market" aria-label="Market cap details"><svg class="icon"><use href="#i-more"/></svg></button><button data-open="market" aria-label="Explain market capitalization"><svg class="icon"><use href="#i-help"/></svg></button><button class="k" data-open="market" aria-label="See market cap calculation"><svg class="icon"><use href="#i-check"/></svg></button></div></div>
+    </section>
+    <section class="ph" aria-labelledby="liq-title">
+     <div class="card-heading"><h2 id="liq-title">Liquidations</h2><span class="feature-icon" aria-hidden="true"><svg class="icon"><use href="#i-flame"/></svg></span></div>
+     <div class="feature-body"><button class="card-body" data-open="liquidations"><span class="feature-value" id="liq-total">Loading…</span><p id="liq-summary">Forcibly closed leveraged positions.</p></button><button class="ring" data-open="liquidations" aria-label="Inspect liquidation breakdown"><span class="ring-inner"><svg class="icon"><use href="#i-up"/></svg></span></button></div>
+     <div class="card-footer"><div class="wt" aria-label="Liquidation window"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><button data-window="1h" aria-pressed="false">1h</button><button data-window="4h" aria-pressed="false">4h</button><button data-window="24h" aria-pressed="true">24h</button></div><div class="fc" aria-hidden="true"><i class="coin-blue"></i><i class="coin-peach"></i><i class="coin-red"></i></div></div>
+    </section>
+    <section class="card pulse-card" aria-labelledby="pulse-title">
+     <div class="card-heading"><h2 id="pulse-title">Market pulse</h2><button class="bd w" data-open="pulse" aria-label="Inspect market pulse"><svg class="icon"><use href="#i-flame"/></svg></button></div>
+     <button class="card-body" data-open="pulse"><span class="pulse-value" id="pulse-value">—</span><p id="pulse-summary">Loading market sentiment…</p></button>
+     <div class="card-footer"><button class="pill pulse-pill" id="pulse-pill" data-open="pulse">Fear &amp; Greed</button><button class="text-action" data-open="pulse">Explore sentiment <span aria-hidden="true">↗</span></button></div>
+    </section>
+   </div>
+   <div class="secondary-column">
+    <div class="stats" aria-label="Market overview statistics">
+     <button class="st stat-btc" data-open="market"><b id="btc-stat">—</b><span>BTC share</span></button>
+     <button class="st stat-eth" data-open="market"><b id="eth-stat">—</b><span>ETH share</span></button>
+     <button class="st stat-assets" data-open="movers"><b id="assets-stat">—</b><span>Tokens tracked</span></button>
+    </div>
+    <section class="card movers-card" aria-labelledby="movers-title">
+     <div class="card-heading"><h2 id="movers-title">Biggest movers</h2><button class="bd" data-open="movers" aria-label="Inspect price movers"><svg class="icon"><use href="#i-up"/></svg></button></div>
+     <div class="mover-controls" aria-label="Price mover filters"><button data-movers="all" aria-label="All movers" aria-pressed="true">All</button><button data-movers="gainers" aria-label="Biggest gainers" aria-pressed="false">Gainers</button><button data-movers="losers" aria-label="Biggest losers" aria-pressed="false">Losers</button></div>
+     <div id="movers-preview" class="preview-rows"><p>Loading price movers…</p></div>
+     <div class="card-footer"><button class="pill d" id="movers-pill" data-open="movers">24h · Major tokens</button><button class="text-action" data-open="movers">View all <span aria-hidden="true">↗</span></button></div>
+    </section>
+    <section class="card listings-card" aria-labelledby="listings-title">
+     <div class="card-heading"><h2 id="listings-title">Recent listings</h2><button class="bd w" data-open="listings" aria-label="Inspect new listings"><svg class="icon"><use href="#i-plus"/></svg></button></div>
+     <p class="card-description">Recently added market listings.</p>
+     <div id="listings-preview" class="preview-rows"><p>Loading new listings…</p></div>
+     <div class="card-footer"><button class="pill" id="listings-pill" data-open="listings">Recently added</button><button class="text-action" data-open="listings" aria-label="All recently listed tokens">View all <span aria-hidden="true">↗</span></button></div>
+    </section>
+    <a class="card news-peek" href="#crypto-news"><span class="source-mark" aria-hidden="true"><svg class="icon"><use href="#i-wire"/></svg></span><span><strong>Crypto news</strong><small id="news-preview-label">Latest headlines from independent publishers.</small></span><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg></a>
+   </div>
+  </div>
+  <aside class="wire-panel" id="signal-wire" aria-labelledby="wire-title">
+   <div class="wire-heading"><h2 class="wire-title" id="wire-title">Signal Wire <span aria-hidden="true">🤔</span></h2><button class="text-action" data-open="signals">View all</button></div>
+   <p class="wire-description">The stories behind the market moves.</p>
+   <nav class="dock" aria-label="Signal filters">
+    <button data-filter="all" aria-label="All signals" aria-pressed="true" class="dock-all" title="All signals">T</button>
+    <button data-filter="market" aria-label="Market capitalization signals" aria-pressed="false" class="dock-market" title="Market value">A</button>
+    <button data-filter="losers" aria-label="Token falls" aria-pressed="false" class="dock-losers" title="Token falls"><svg class="icon"><use href="#i-down"/></svg></button>
+    <button data-filter="listings" aria-label="New projects" aria-pressed="false" class="dock-listings" title="New listings"><svg class="icon"><use href="#i-board"/></svg></button>
+    <button data-filter="liquidations" aria-label="Liquidation signals" aria-pressed="false" class="dock-liquidations" title="Liquidations"><svg class="icon"><use href="#i-flame"/></svg></button>
+    <button data-filter="gainers" aria-label="Token gains" aria-pressed="false" class="dock-gainers" title="Token gains"><svg class="icon"><use href="#i-up"/></svg></button>
+    <button data-open="paid" aria-label="X tracking coming soon" class="dock-more" title="Paid X tracking · Coming soon">X</button>
+    <button data-filter="news" aria-label="News reports" aria-pressed="false" class="dock-news" title="News reports"><svg class="icon"><use href="#i-wire"/></svg></button>
+    <button data-filter="personal" aria-label="My signal feed" aria-pressed="false" class="dock-personal" title="My tracked coins"><svg class="icon"><use href="#i-star"/></svg></button>
+   </nav>
+   <div id="wire-events" aria-live="polite"></div>
+   <div id="floating-event"></div>
+   <button class="wire-more" data-open="signals" aria-label="Explore all signals">Explore the Signal Wire <span aria-hidden="true">↗</span></button>
+  </aside>
+ </div>
+ <section class="news-section" id="crypto-news" aria-labelledby="news-title">
+  <div class="news-heading"><div><h2 id="news-title">Crypto news</h2><p>Reporting from independent publishers, with links to the original stories.</p></div><button class="text-action" data-open="news">View all news <span aria-hidden="true">↗</span></button></div>
+  <nav class="news-publishers" id="news-publishers" aria-label="Filter news by publisher"></nav>
+  <div class="news-grid" id="news-grid" aria-live="polite"></div>
+ </section>
+</main>
+<footer class="site-footer"><span>Everything</span><span>Crypto and real-world assets, together</span><button data-open="about">How it works <span aria-hidden="true">↗</span></button></footer>
+
+<dialog id="detail-dialog" aria-labelledby="detail-title">
+ <header class="detail-header"><h2 id="detail-title">Details</h2><button id="close-dialog" aria-label="Close details"><svg class="icon"><use href="#i-close"/></svg></button></header>
+ <div id="detail-content"></div>
+</dialog>
+<div class="extension-links"><button id="extension-options">Extension preferences</button><button id="extension-board">Open dashboard</button></div></body>
+</html>

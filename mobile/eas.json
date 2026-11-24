@@ -1,0 +1,21 @@
+{
+  "cli": {
+    "version": ">=16.0.0"
+  },
+  "build": {
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://everything-crypto-greyw0rks.vercel.app"
+      }
+    },
+    "production": {
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://everything-crypto-greyw0rks.vercel.app"
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Everything",
+    "slug": "everything-crypto",
+    "version": "1.1.0",
+    "scheme": "everythingcrypto",
+    "orientation": "default",
+    "userInterfaceStyle": "light",
+    "android": {
+      "package": "com.greyworks.everythingcrypto",
+      "permissions": [
+        "INTERNET"
+      ],
+      "versionCode": 2,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#0b0b0b"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "com.greyworks.everythingcrypto",
+      "supportsTablet": true
+    },
+    "plugins": [
+      "expo-font",
+      "expo-secure-store"
+    ],
+    "splash": {
+      "backgroundColor": "#d8f0f6"
+    },
+    "owner": "greyw0rks",
+    "icon": "./assets/icon.png",
+    "extra": {
+      "eas": {
+        "projectId": "40a2cceb-897e-478b-931d-6c2421fbfabb"
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+html{width:360px;height:600px;overflow:hidden;scroll-padding-top:70px}
+body{width:360px;height:600px;min-height:0;overflow-x:hidden;overflow-y:auto;padding-bottom:68px}
+.header-inner{min-height:60px;padding:8px 14px;flex-wrap:nowrap;gap:8px}
+.site-header .nav{display:none}
+.header-actions{gap:0}
+.page{width:calc(100% - 28px);margin:12px auto 24px}
+.page-heading{gap:10px;margin-bottom:12px}
+.board-title{font-size:24px}
+.page-heading p{display:none}
+.search{min-height:42px}
+.board-status{margin-bottom:14px;padding:8px 12px}
+.page-layout,.market-columns{gap:14px}
+.utility-rail{gap:6px}
+.side{padding:4px}
+.stats{gap:8px;order:3}
+.st{min-height:76px;padding:12px 10px}
+.st b{font-size:24px}
+.card,.ph{padding:18px;border-radius:20px}
+.card-heading{margin-bottom:12px}
+.card-heading h2{font-size:20px}
+.market-value,.rwa-value,.feature-value{font-size:34px}
+.market-card>p,.rwa-total-card>p,.ph>p,.rwa-meaning>p{font-size:13px}
+.ph{transform:none}
+.wire-title{font-size:23px}
+.site-footer{display:none}
+.extension-links{position:fixed;z-index:21;bottom:0;left:0;width:360px;display:flex;justify-content:space-between;gap:8px;margin:0;padding:10px 14px;background:#f7f7f7;border-top:1px solid #dedede;font-size:12px}
+.extension-links button{min-height:40px;background:#e6e6e6;border-radius:20px;padding:8px 12px}
+dialog{width:calc(100% - 24px);max-height:calc(100dvh - 24px);padding:18px}
