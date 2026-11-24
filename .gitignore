@@ -1,0 +1,5 @@
+*.apk
+*.zip
+*.env
+.env*
+credentials.json
